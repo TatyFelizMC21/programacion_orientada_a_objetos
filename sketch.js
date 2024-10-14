@@ -1,52 +1,50 @@
-////////////////////////DECLARAR VARIABLES/////////////////////////////////////////////
-let posX, posY; // Posición
-let velX, velY; // Velocidad
-let colorCH; // Color del BG
-let diametro;
-let radio;
+let fonditoDeColorin;
+let pelotas = [];
 
-////////////////////////FUNCTION SETUP/////////////////////////////////////////////
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
-  radio = ceil(random(20, 50)); // Tamaño de la pelota
-  diametro = radio * 2;
-
-  posX = random(radio, width - radio); // P0 aleatoria
-  posY = random(radio, height - radio);
-
-  velX = random(-10, 10); // V0 aleatoria en X
-  velY = random(-10, 10); // V0 aleatoria en Y
-
-  colorCH = color(255);
+  fonditoDeColorin = color(random(100, 255), random(100), random(255));
+  for (let i = 0; i < 100; i++) {
+    let nuevaPelota = new Pelota();
+    pelotas.push(nuevaPelota);
+  }
 }
 
-////////////////////////FUNCTION DRAW/////////////////////////////////////////////
 function draw() {
-  background(colorCH);
-
-  // DIBUJAR PELOTA
-  fill(255);
-  noStroke();
-  circle(posX, posY, diametro);
-
-  // Posición
-  posX += velX;
-  posY += velY;
-
-  // REBOTE EN LOS BORDES
-
-  if (posX > width - radio || posX < radio) {
-    velX *= -1; // Invertir la velocidad en X
-    cambiarcolor();
-  }
-
-  if (posY > height - radio || posY < radio) {
-    velY *= -1; // Invertir la velocidad en Y
-    cambiarcolor();
+  background(fonditoDeColorin);
+  for (let i = 0; i < 100; i++) {
+    pelotas[i].update();
+    pelotas[i].display();
   }
 }
 
-function cambiarcolor() {
-  colorCH = color(random(255), random(255), random(255));
+class Pelota {
+  // Plano de instrucciones para creae una pelota
+  constructor() {
+    this.rad = ceil(random(5, 30));
+    this.diam = this.rad * 2;
+    this.posX = random(this.rad, width - this.rad);
+    this.posY = random(this.rad, height - this.rad);
+    this.velX = random(-10, 10);
+    this.velY = random(-10, 10);
+    console.log("estoy viaaaaa!");
+  }
+  // método update
+  update() {
+    this.posX += this.velX;
+    this.posY += this.velY;
+
+    if (this.posX > width - this.rad || this.posX < this.rad) {
+      this.velX *= -1;
+    }
+    if (this.posY > height - this.rad || this.posY < this.rad) {
+      this.velY *= -1;
+    }
+  }
+
+  display() {
+    fill(255);
+    noStroke();
+    circle(this.posX, this.posY, this.diam);
+  }
 }
