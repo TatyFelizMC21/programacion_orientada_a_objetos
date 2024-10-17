@@ -1,4 +1,4 @@
-let fonditoDeColorin;
+/*let fonditoDeColorin;
 let pelotas = [];
 
 function setup() {
@@ -46,5 +46,22 @@ class Pelota {
     fill(255);
     noStroke();
     circle(this.posX, this.posY, this.diam);
+  }
+}*/
+
+let particulas = [];
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+}
+
+function draw() {
+  background(20, 10);
+  let nuevaParticula = new Particula(mouseX, mouseY);
+  Particulas.push(nuevaParticula);
+
+  for (let i = 0; i < particulas.length; i++) {
+    particulas(i).update();
+    particulas(i).display();
   }
 }
