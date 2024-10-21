@@ -1,54 +1,3 @@
-/*let fonditoDeColorin;
-let pelotas = [];
-
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  fonditoDeColorin = color(random(100, 255), random(100), random(255));
-  for (let i = 0; i < 100; i++) {
-    let nuevaPelota = new Pelota();
-    pelotas.push(nuevaPelota);
-  }
-}
-
-function draw() {
-  background(fonditoDeColorin);
-  for (let i = 0; i < 100; i++) {
-    pelotas[i].update();
-    pelotas[i].display();
-  }
-}
-
-class Pelota {
-  // Plano de instrucciones para creae una pelota
-  constructor() {
-    this.rad = ceil(random(5, 30));
-    this.diam = this.rad * 2;
-    this.posX = random(this.rad, width - this.rad);
-    this.posY = random(this.rad, height - this.rad);
-    this.velX = random(-10, 10);
-    this.velY = random(-10, 10);
-    console.log("estoy viaaaaa!");
-  }
-  // método update
-  update() {
-    this.posX += this.velX;
-    this.posY += this.velY;
-
-    if (this.posX > width - this.rad || this.posX < this.rad) {
-      this.velX *= -1;
-    }
-    if (this.posY > height - this.rad || this.posY < this.rad) {
-      this.velY *= -1;
-    }
-  }
-
-  display() {
-    fill(255);
-    noStroke();
-    circle(this.posX, this.posY, this.diam);
-  }
-}*/
-
 let particulas = [];
 
 function setup() {
@@ -56,12 +5,47 @@ function setup() {
 }
 
 function draw() {
-  background(20, 10);
-  let nuevaParticula = new Particula(mouseX, mouseY);
-  Particulas.push(nuevaParticula);
+  background(20);
+  let nuevaParticula = new particulas(mouseX, mouseY);
+  particulas.push(nuevaParticula);
+
+  for (let i = 0; i < particulas.length - 1; i++) {
+    particulas[i].update();
+    particulas[i].display();
+  }
+
+  /*
+   * Esta es una forma de borrar las partículas muertas utilizando
+   * un for loop que navega todas las partículas y se pergunta por
+   * la varible boleana estaViva.
+   *
+   * Utiliza la función slipice para borrar la partícula específica
+   * mediante su Indice
+   *
+   */
+
+  // for (let i = 0; i < particulas.length; i++) {
+  // 	if (!particulas[i].estaViva) {
+  // 		particulas.splice(i, 1);
+  // 	}
+  // }
+
+  /**
+   * Esta es la forma moderna de resolverlo
+   */
+
+  particulas = particulas.filter((pelota) => pelota.estaViva);
+
+  noFill();
+  stroke(252, 99, 56);
+  strokeWeight(1);
 
   for (let i = 0; i < particulas.length; i++) {
-    particulas(i).update();
-    particulas(i).display();
+    particulas[i].posx;
+    particulas[i].posy;
+    particulas[i + 1].posx;
+    particulas[i + 1] - posy;
   }
+
+  console.log(particulas.length);
 }
