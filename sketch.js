@@ -20,7 +20,7 @@ function draw() {
   // Filtrar partículas que aún están "vivas"
   particulas = particulas.filter((pelota) => pelota.estaViva());
 
-  // Crear un trazo entre las partículas (esto puede ser opcional para mejorar el efecto)
+  // Crear un trazo entre las partículas (para mejorar el efecto)
   noFill();
   stroke(252, 99, 56);
   strokeWeight(1);
